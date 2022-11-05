@@ -1,0 +1,74 @@
+
+*{
+    font-family: 'Quicksand', sans-serif    ;
+    background-color: #222222;
+    color:white;
+    color: #E6E6FA;
+}
+
+.title{
+    margin-left: 30px;
+    margin-top: 160px;
+}
+
+.welcome{
+margin-top: 140px;
+font-size: 100px;
+margin-left: 56px;
+transform: scale(0.94);
+animation: scale 3s forwards cubic-bezier(0.5, 1, 0.89, 1);
+}
+
+.heading{
+    width: 50%;
+    left : 0;
+    display: inline-block;
+}
+
+.form{
+    float: right;
+    display: inline-block;
+    margin-right:78px ;
+    margin-top: calc(50% - 100px);
+}
+
+.username{
+    display: block;
+    margin-bottom: 30px;
+}
+
+.password{
+    display: block;
+}
+
+.ifWeHaveAnAccount{
+    cursor: pointer;
+}
+
+input:focus{
+    outline: none;
+    border-width: 2px;
+}
+
+.formlabel{
+    color: #E6E6FA;
+
+}
+
+
+.textbox{
+    box-shadow: none;
+    height: 40px;
+    width: 250px;
+    border: 0;
+    border-bottom: 2px solid #9b9b9b;
+    transition: border-color 0.2s;
+}
+
+.textbox:focus::placeholder{
+    color: transparent;
+}
+
+.signUpPageContent{
+    display: flexbox;
+}
