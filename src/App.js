@@ -1,31 +1,21 @@
 import './App.css';
 import LoginPage from './components/LoginPage';
 import React, { useState } from 'react';
-import UserPage from './components/UserPage';
-import SignUpPage from './components/SignUpPage';
-import AdminPage from './components/AdminPage';
-import HostPage from './components/HostPage';
 import { roleContext } from './Helpers/contexts';
-
+import  {BrowserRouter, Route, Routes} from "react-router-dom"
+import SignupPage from './components/SignUpPage';
 
 function App() {
-  const[haveAccount,createAccount] = useState(true)
-  const[role,setRole] = useState("")
-  const[signedIn,setSignIn] = useState(false)
-  
+
   return (
     <div className="App">
-
-      <roleContext.Provider 
-      value = {{signedIn,setSignIn,role,roleContext,signedIn,setSignIn}}>
-      {signedIn===false?
-      (haveAccount===false?<SignUpPage/>:<LoginPage/>):
-      role==="admin"?<AdminPage/>:
-      (role==="User"? <UserPage/>: <HostPage/>)
-      } 
-
-      </roleContext.Provider>
-
+      <BrowserRouter>
+      <Routes>
+        <Route path='*' element={<h1>ERROR 404 PAGE NOT FOUND</h1>}></Route>
+        <Route path='/' element={<LoginPage/>}></Route>
+        <Route path='/signup' element={<SignupPage/>}></Route>
+      </Routes>
+      </BrowserRouter>
     </div>
 
   );

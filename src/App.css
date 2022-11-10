@@ -2,21 +2,20 @@
 *{
     font-family: 'Quicksand', sans-serif    ;
     background-color: #222222;
-    color:white;
     color: #E6E6FA;
 }
 
 .title{
     margin-left: 30px;
     margin-top: 160px;
+    height: 40px;
 }
 
 .welcome{
 margin-top: 140px;
-font-size: 100px;
+font-size: 130px;
 margin-left: 56px;
 transform: scale(0.94);
-animation: scale 3s forwards cubic-bezier(0.5, 1, 0.89, 1);
 }
 
 .loginButton{
@@ -25,19 +24,59 @@ animation: scale 3s forwards cubic-bezier(0.5, 1, 0.89, 1);
     height: 45px;
     border-radius: 16px;
     border-color: white;
-    width: 90px;
+    width: 97px;
 }
 
-.loginButton:hover{
-    font-size: 25px;
+#geegee:hover{
+    font-size: 22px;
     font-weight: bold;
+    cursor: pointer;
+    transition-duration: 50ms;
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+.loginButton:hover{
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+    transition-duration: 50ms;
+}
+
+.animation1{
+    width: 100%;
+    animation: typing 2s steps(29), blink .5s step-end infinite alternate;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 3px solid;
+    place-items:center;
+}
+  
+  @keyframes typing {
+    from {
+      width: 0
+    }
+  }
+      
+  @keyframes blink {
+    50% {
+      border-color: transparent
+    }
+  }
 
 .signupbutton{
     border: 0;
     cursor: pointer;
-    text-decoration: underline;
     font-size: 15px;
+}
+
+.signupbutton:hover{
+    text-decoration: underline;
 }
 
 .heading{
@@ -46,7 +85,7 @@ animation: scale 3s forwards cubic-bezier(0.5, 1, 0.89, 1);
     display: inline-block;
 }
 
-.form{
+.form1{
     font-size: 20px;
     float: right;
     display: inline-block;
@@ -54,17 +93,14 @@ animation: scale 3s forwards cubic-bezier(0.5, 1, 0.89, 1);
     margin-top: calc(50% - 100px);
 }
 
-.username{
-    display: block;
-    margin-bottom: 30px;
-}
-
-.password{
-    display: block;
-}
 
 .ifWeHaveAnAccount{
     cursor: pointer;
+}
+
+.form{
+    display: grid;
+    justify-content: center;
 }
 
 input:focus{
@@ -72,23 +108,28 @@ input:focus{
     border-width: 2px;
 }
 
-.formlabel{
-    color: #E6E6FA;
-
+.title2{
+    text-align: center;
+    margin-bottom: 130px;
 }
-
 
 .textbox{
     box-shadow: none;
+    margin-bottom: 30px;
     height: 40px;
     width: 250px;
     border: 0;
     border-bottom: 2px solid #9b9b9b;
     transition: border-color 0.2s;
+    display: block;
 }
 
 .textbox:focus::placeholder{
     color: transparent;
+}
+
+input:focus + label {
+    color: red;
 }
 
 .signUpPageContent{

@@ -1,68 +1,66 @@
-import React from 'react'
-import { useContext } from 'react'
-import { roleContext } from '../Helpers/contexts'
-import { useState } from 'react'
+import React from "react";
+import { useContext } from "react";
+import { roleContext } from "../Helpers/contexts";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function SignupPage() {
+  const[user,setUser]=useState({username:"",password:""})
+  const navigate = useNavigate();
+
+  const dealingWithSignUpButton = () => {
+    navigate("/signup")
+  };
   
-    const {signedIn,setSignIn,haveAccount,createAccount} = useContext(roleContext)
-    const [username,setUsername] = useState("")
-    const [password,setPassword] = useState("")
+  const handleInputs = (e) =>{
+    setUser({...user,[e.target.name]:e.target.value})
+  } 
 
-    const dealingWithSignUp =()=>{
-        haveAccount(false)
-    }
+  const dealingWithLogin = () =>{
 
-    const usernameHandling = e =>{
-        setUsername(e.target.value)
-    }
+  }
 
-    const passwordHandling = e =>{
-        setPassword(e.target.value)
-    }
-
-    return (
-    <div className='signUpPageContent'>
-        <div className='heading'>
-           <h1 className='welcome'>WELCOME!</h1>
-           <h1 className='title'>
-                <span>Login </span> 
-                <span>to </span>
-                <span>access </span>
-                <span>the </span>
-                <span>website </span>
-            </h1>
+  return (
+    <div className="signUpPageContent">
+      <div className="heading">
+        <h1 className="welcome">WELCOME!</h1>
+        <div className="">
+          <h1 className="title animation1">Login to access the website</h1>
         </div>
-        <div className='form'>
-            <div>
-                <label className='formlabel forUsername'>
-                    Username
-                </label>
-                <input 
-                className='username textbox'
-                value='username' 
-                placeholder='Username' 
-                onChange={(e)=>{usernameHandling(e); console.log(username)  }}>
-                </input>
-            </div>
-            <div>
-                <label className='formlabel forPassword' >
-                    Password
-                </label>
-                <input 
-                className='password textbox' 
-                placeholder='password' 
-                value='password' type="password" 
-                onChange={(e)=>{passwordHandling(e)}} >
-                </input>
-            </div>
-            <button className='loginButton'>
-                Login
-            </button>
-            <p className='ifWeHaveAnAccount'>
-                <button className='signupbutton' onClick={dealingWithSignUp}>Sign up?</button>
-            </p>
+      </div>
+      <form className="form1" onSubmit={dealingWithLogin} method="POST">
+        <div>
+          <label className="formlabel forUsername" htmlFor="username textbox">
+            Username
+          </label>
+          <input
+            name="username"
+            className="username textbox"
+            placeholder="Username"
+            type="text"
+            onChange={handleInputs}
+          ></input>
         </div>
+        <div>
+          <label className="formlabel forPassword" htmlFor="password textbox">
+            Password
+          </label>
+          <input
+            name="password"
+            className="password textbox"
+            placeholder="password"
+            type="password"
+            onChange={handleInputs}
+          ></input>
+        </div>
+        <button className="loginButton">Login</button>
+        <p className="ifWeHaveAnAccount">
+          <button className="signupbutton" onClick={dealingWithSignUpButton}>
+            Sign up?
+          </button>
+        </p>
+
+      </form>
     </div>
-  )
+  );
 }
