@@ -93,7 +93,6 @@ input::-webkit-inner-spin-button {
     margin-top: calc(50% - 100px);
 }
 
-
 .ifWeHaveAnAccount{
     cursor: pointer;
 }
@@ -128,8 +127,8 @@ input:focus{
     color: transparent;
 }
 
-input:focus + label {
-    color: red;
+.parent:focus-within:focus-within label{
+    font-weight: bold;
 }
 
 .signUpPageContent{

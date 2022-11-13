@@ -22,9 +22,13 @@ const userSchema = new mongoose.Schema({
     }
 },{timestamps:true})
 
+
+userSchema.pre('save',async function(next){
+    if(this.isModified('password')){
+        this.password= await bcrypt.hash(this.password,12)
+    }
+    next()
+})
+
 const User = mongoose.model('users',userSchema)
 module.exports = User
-
-userSchema.pre('save',async (next)=>{
-
-})

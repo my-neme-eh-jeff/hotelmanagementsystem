@@ -2,9 +2,11 @@
   "name": "hotelmanagementsystem",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:5000",
   "dependencies": {
     "bcrypt": "^5.1.0",
     "dotenv": "^16.0.3",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.7.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
