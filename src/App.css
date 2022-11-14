@@ -85,6 +85,10 @@ input::-webkit-inner-spin-button {
     display: inline-block;
 }
 
+.Error{
+    color: red;
+}
+
 .form1{
     font-size: 20px;
     float: right;

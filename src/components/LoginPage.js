@@ -5,39 +5,65 @@ import { useNavigate } from "react-router-dom";
 export default function SignupPage() {
   const [user, setUser] = useState({ username: "", password: "" })
   const navigate = useNavigate();
+  const [errorForUsername, setErrorForUsername] = useState("")
+  const [errorForPassword, setErrorForPassword] = useState("")
 
   const dealingWithSignUpButton = () => {
     navigate("/signup")
   };
 
+  const validateData = () => {
+    var validate = true;
+    if ((user.password === "")) {
+      validate = false
+      setErrorForPassword("This field is required")
+    }
+    if (user.username === "") {
+      validate = false
+      setErrorForUsername("This field is required")
+    }
+
+    return validate
+  };
+
+
   const handleInputs = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value })
   }
 
+  const clearErrors = () => {
+    setErrorForUsername(" ")
+    setErrorForPassword(" ")
+  }
+
+
   const dealingWithLogin = async (e) => {
     e.preventDefault();
-    const { username, password } = user
+    clearErrors()
 
-    const response = await fetch("/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ username, password })
-    })
+    if (validateData()) {
+      const { username, password } = user
+      const response = await fetch("/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ username, password })
+      })
 
-    const responeInJSON = await response.json()
-    console.log(responeInJSON + "YYYYYYYY")
-    if(response.status===200){
-        if(responeInJSON.role==='admin'){
+      const responeInJSON = await response.json()
+      console.log(responeInJSON + "YYYYYYYY")
+      if (response.status === 200) {
+        if (responeInJSON.role === 'admin') {
           navigate("/admin")
-        }else if(responeInJSON.role==='host'){
+        } else if (responeInJSON.role === 'host') {
           navigate("/host")
-        }else{
+        } else {
           navigate("/user")
         }
+      }
+      console.log(response)
     }
-    console.log(response)
   }
 
   return (
@@ -52,7 +78,7 @@ export default function SignupPage() {
         <div className="parent">
           <label className="formlabel forUsername" htmlFor="username textbox">
             Username
-          </label>
+          </label> <span className="Error" dangerouslySetInnerHTML={{ __html: errorForUsername }}></span>
           <input
             name="username"
             className="username textbox"
@@ -64,7 +90,7 @@ export default function SignupPage() {
         <div className="parent">
           <label className="formlabel forPassword" htmlFor="password textbox">
             Password
-          </label>
+          </label> <span className="Error" dangerouslySetInnerHTML={{ __html: errorForPassword }}></span>
           <input
             name="password"
             className="password textbox"
