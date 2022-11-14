@@ -2,6 +2,8 @@ const express = require("express");
 const User = require("./db/userSchema");
 const router = new express.Router();
 const bcrypt = require("bcrypt")
+const jwt = require("jsonwebtoken")
+const authenicicate = require("./middleware/authenicication")
 
 router.post("/signup", async (req, res) => {
   const { username, password, phonenumber, role} = req.body;
@@ -20,7 +22,8 @@ router.post("/signup", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+
+router.post("/" ,async (req, res) => {
     try{    
         const {username,password} = req.body
         
@@ -29,7 +32,15 @@ router.post("/", async (req, res) => {
           res.status(404).json({error:"No user exists"})
         }else{
             const passwordMatchOrNot = await bcrypt.compare(password,userToBeChecked.password)
-            if(passwordMatchOrNot) return res.status(200).json({message:"Login successfully" , role:userToBeChecked.role})
+            if(passwordMatchOrNot) { 
+              const token = await userToBeChecked.generateAuthToken();
+              console.log(token + "GGGGGGGGGGGGG")
+              res.cookie("jsonwebtoken",token,{
+                expires: new Date(Date.now() + 3600000 ),
+                httpOnly:true
+              })  
+              return res.status(200).json({message:"Login successfully" , role:userToBeChecked.role})
+            }
             else res.status(404).json({message:"Password did not match"})
         }
     }catch(err){
@@ -37,6 +48,17 @@ router.post("/", async (req, res) => {
     }
 });
  
+router.get("/AdminPage", authenicicate , (req,res)=>{
+  res.send(req.userData)
+})
+
+router.get("/HostPage", authenicicate , (req,res)=>{
+  res.send(req.userData)
+})
+
+router.get("/UserPage", authenicicate , (req,res)=>{
+  res.send(req.userData)
+})
 
 
 module.exports = router;

@@ -49,6 +49,8 @@ export default function SignupPage() {
     };
   }
   
+  
+
 
   return (
     <div>
@@ -59,8 +61,8 @@ export default function SignupPage() {
 
             <div className="parent">
             <label className="formlabel forUsername" htmlFor="username">
-              Username
-            </label>
+              Username  
+            </label> <span className="usernameError"></span>
             <input
               id="username"
               name="username"

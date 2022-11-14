@@ -3,6 +3,9 @@ const app = express();
 const dotenv=require('dotenv')
 dotenv.config({path:'./db/config.env'})
 const User = require("../server/db/userSchema")
+const jwt = require("jsonwebtoken")
+var cookieParser = require('cookie-parser')
+app.use(cookieParser())
 
 app.use(express.json())
 //you need to use this if the data youre sending is an object as it tells the server this 

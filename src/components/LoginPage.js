@@ -27,7 +27,7 @@ export default function SignupPage() {
     })
 
     const responeInJSON = await response.json()
-    console.log(responeInJSON)
+    console.log(responeInJSON + "YYYYYYYY")
     if(response.status===200){
         if(responeInJSON.role==='admin'){
           navigate("/admin")
