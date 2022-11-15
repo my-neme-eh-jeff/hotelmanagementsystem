@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
 
 export default function UserPage() {
   const navigate = useNavigate();
+  const [userData,setUserData] = useState({})
+
   const callUserPage = async () =>{
     try{
       const res = await fetch("/UserPage", {
@@ -15,13 +18,12 @@ export default function UserPage() {
       })
 
       const data = await res.json()
-      console.log(data)
+      setUserData(data)
 
       if(res.status!==200){
-        console.log("yoooooooo")
         throw new Error
       }
-      if(data.role!=="admin"){
+      if(data.role!=="user"){
         throw new Error
       }
 
@@ -39,6 +41,9 @@ export default function UserPage() {
 
 
   return (
+    <>
     <div>UserPage</div>
+    <h1>welcome {userData.username}</h1>
+    </>
   )
 }

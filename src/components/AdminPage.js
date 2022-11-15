@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
 
 export default function AdminPage() {
   const navigate = useNavigate();
+  const [userData,setUserData] = useState({})
 
   const callAdminPage = async () =>{
     try{
@@ -14,14 +16,10 @@ export default function AdminPage() {
         },
         credentials:"include"
       })
-
-      console.log("responese object")
-      console.log(res)
       const data = await res.json()
-      console.log(data)
+      setUserData(data)
 
       if(res.status!==200){
-        console.log("yoooooooo")
         throw new Error
       }
       if(data.role!=="admin"){
@@ -40,6 +38,9 @@ export default function AdminPage() {
   //since our array dependency is null useeffect will onl runs once when the page gets rendered
 
   return (
+    <>
     <div>AdminPage</div>
+    <h1>welcome {userData.username}</h1>
+    </>
   )
 }

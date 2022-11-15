@@ -40,7 +40,6 @@ export default function SignupPage() {
       setErrorForPassword("Please enter a stronger password")
     }
     var specialChars =/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/
-    console.log(specialChars.test(data.username))
     if(specialChars.test(data.username)){
       validate=false
       setErrorForUsername("Name cannot have special characters")
@@ -80,25 +79,19 @@ export default function SignupPage() {
     event.preventDefault();
     clearErrors()
     if (validateData()) {
-      const { username, password, phonenumber, role } = data
-
       const response = await fetch("/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ username, password, phonenumber, role })
+        body: JSON.stringify(data)
       })
-
       const responeInJSON = await response.json()
 
-      console.log(response.status)
       if (response.status === 201) {
-        console.log("User created successfully")
         navigate("/")
       } else {
         if (responeInJSON.error == "username is already taken") {
-          console.log(responeInJSON)
           setErrorForUsername(responeInJSON.error)
         }
       }

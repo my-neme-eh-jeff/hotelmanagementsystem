@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
 
 export default function HostPage() {
   const navigate = useNavigate();
+  const [userData,setUserData] = useState({})
 
   const callHostPage = async () =>{
     try{
@@ -16,9 +18,9 @@ export default function HostPage() {
       })
 
       const data = await res.json()
+      setUserData(data)
 
       if(res.status!==200){
-        console.log("yoooooooo")
         throw new Error
       }
       if(data.role!=="host"){
@@ -39,6 +41,9 @@ export default function HostPage() {
 
 
   return (
+    <>
     <div>HostPage</div>
+    <h1>welcome {userData.username}</h1>
+    </>
   )
 }

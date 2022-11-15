@@ -48,11 +48,10 @@ export default function SignupPage() {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ username, password })
+        body: JSON.stringify(user)
       })
 
       const responeInJSON = await response.json()
-      console.log(responeInJSON + "YYYYYYYY")
       if (response.status === 200) {
         if (responeInJSON.role === 'admin') {
           navigate("/admin")
@@ -61,8 +60,9 @@ export default function SignupPage() {
         } else {
           navigate("/user")
         }
+      }else{
+        alert("Invalid credentials lol")
       }
-      console.log(response)
     }
   }
 

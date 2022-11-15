@@ -10,7 +10,6 @@ router.post("/signup", async (req, res) => {
   const userExist = await User.findOne({ username: username });
   try {
     if (userExist) {
-      console.log("user exist vala part")
       return res.status(422).json({ error: "username is already taken" });
     }
     const data = new User({ username, password, phonenumber,role });
@@ -34,7 +33,6 @@ router.post("/" ,async (req, res) => {
             const passwordMatchOrNot = await bcrypt.compare(password,userToBeChecked.password)
             if(passwordMatchOrNot) { 
               const token = await userToBeChecked.generateAuthToken();
-              console.log(token + "GGGGGGGGGGGGG")
               res.cookie("jsonwebtoken",token,{
                 expires: new Date(Date.now() + 3600000 ),
                 httpOnly:true
