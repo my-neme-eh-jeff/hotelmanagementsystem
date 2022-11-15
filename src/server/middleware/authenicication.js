@@ -4,6 +4,7 @@ const User = require("../db/userSchema")
 const authenicicate = async (req,res,next) =>{
     try{
         const token = req.cookies.jsonwebtoken
+        console.log(token)
         if(!token) throw new Error("Login first")
         //verify returns our decrypted payload 
         const decryptedPayload = jwt.verify(token,process.env.secret_key)

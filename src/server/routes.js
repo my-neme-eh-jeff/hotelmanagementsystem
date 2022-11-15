@@ -3,7 +3,8 @@ const User = require("./db/userSchema");
 const router = new express.Router();
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
-const authenicicate = require("./middleware/authenicication")
+const authenicicate = require("./middleware/authenicication");
+const { Routes } = require("react-router-dom");
 
 router.post("/signup", async (req, res) => {
   const { username, password, phonenumber, role} = req.body;
@@ -58,5 +59,9 @@ router.get("/UserPage", authenicicate , (req,res)=>{
   res.send(req.userData)
 })
 
+router.get("/Logout" , (req,res)=>{
+  res.clearCookie("jsonwebtoken",{path:"/"})
+  res.status(200).send("user logged out")
+})
 
 module.exports = router;
