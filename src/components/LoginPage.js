@@ -1,12 +1,60 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import jwt_decode from "jwt-decode"
 
 export default function SignupPage() {
   const [user, setUser] = useState({ username: "", password: "" })
   const navigate = useNavigate();
   const [errorForUsername, setErrorForUsername] = useState("")
   const [errorForPassword, setErrorForPassword] = useState("")
+
+
+  const handleCallbackResponse = async (response) => {
+    var decodedUserObject = jwt_decode(response.credential)
+
+
+    const res = await fetch("/auth", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(decodedUserObject)
+    })
+
+    const responeInJSON = await res.json()
+    console.log(responeInJSON)
+    if (res.status === 200) {
+      if (responeInJSON.role === 'admin') {
+        navigate("/admin")
+      } else if (responeInJSON.role === 'host') {
+        navigate("/host")
+      } else {
+        navigate("/user")
+      }
+    } else {
+      if (responeInJSON.message === "signup") {
+        alert("Please signup first")
+        navigate("/signup")
+      } else {
+        alert("could not verify email id")
+      }
+    }
+
+  }
+
+  useEffect(() => {
+    /* global google */
+    google.accounts.id.initialize({
+      client_id: "366366904605-l8lu5ma88flp9k0e3fr5ueq2173vhurr.apps.googleusercontent.com",
+      callback: handleCallbackResponse
+    })
+
+    google.accounts.id.renderButton(
+      document.getElementById("signInDiv"),
+      { theme: "outline", size: "large" }
+    )
+  }, [])
 
   const dealingWithSignUpButton = () => {
     navigate("/signup")
@@ -16,11 +64,11 @@ export default function SignupPage() {
     var validate = true;
     if ((user.password === "")) {
       validate = false
-      setErrorForPassword("This field is required")
+      setErrorForPassword("field is required")
     }
     if (user.username === "") {
       validate = false
-      setErrorForUsername("This field is required")
+      setErrorForUsername("field is required")
     }
 
     return validate
@@ -42,7 +90,6 @@ export default function SignupPage() {
     clearErrors()
 
     if (validateData()) {
-      const { username, password } = user
       const response = await fetch("/", {
         method: "POST",
         headers: {
@@ -60,7 +107,7 @@ export default function SignupPage() {
         } else {
           navigate("/user")
         }
-      }else{
+      } else {
         alert("Invalid credentials lol")
       }
     }
@@ -77,12 +124,12 @@ export default function SignupPage() {
       <form className="form1" onSubmit={dealingWithLogin} method="POST">
         <div className="parent">
           <label className="formlabel forUsername" htmlFor="username textbox">
-            Username
+            Username/Email id
           </label> <span className="Error" dangerouslySetInnerHTML={{ __html: errorForUsername }}></span>
           <input
             name="username"
             className="username textbox"
-            placeholder="Username"
+            placeholder="Username / Email"
             type="text"
             onChange={handleInputs}
           ></input>
@@ -102,6 +149,9 @@ export default function SignupPage() {
         <button className="loginButton" type="submit">
           Login
         </button>
+        <div id="signInDiv">
+
+        </div>
         <p className="ifWeHaveAnAccount">
           <button className="signupbutton" type="submit" onClick={dealingWithSignUpButton}>
             Sign up?

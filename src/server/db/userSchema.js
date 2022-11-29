@@ -21,6 +21,10 @@ const userSchema = new mongoose.Schema({
         required: true,
         enum: ['admin', 'host', 'user']
     },
+    email: {
+        type:String,
+        required:true
+    },
     tokens:
         [
             {

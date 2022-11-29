@@ -101,6 +101,10 @@ input::-webkit-inner-spin-button {
     cursor: pointer;
 }
 
+#signInDiv{
+    margin-top: 30px;
+}
+
 .form{
     display: grid;
     justify-content: center;

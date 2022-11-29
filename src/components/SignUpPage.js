@@ -1,8 +1,9 @@
 import React from "react";
 import { useState } from "react";
-import PhoneInput from "react-phone-number-input";
 import { useNavigate } from "react-router-dom";
+import validator from 'validator';
 const { passwordStrength } = require('check-password-strength')
+
 
 export default function SignupPage() {
   let navigate = useNavigate()
@@ -10,6 +11,8 @@ export default function SignupPage() {
   const [errorForPassword, setErrorForPassword] = useState("")
   const [errorForPhoneNumber, setErrorForPhoneNumber] = useState("")
   const [errorForRole,setErrorForRole] = useState("")
+  const [errorForEmail,setErrorForEmail] = useState("")
+
 
   const [data, setData] = useState({
     username: "",
@@ -17,6 +20,7 @@ export default function SignupPage() {
     confirmPassword: "",
     phonenumber: 0,
     role: "",
+    email:"",
   });
 
   const handleInputs = (e) => {
@@ -64,6 +68,10 @@ export default function SignupPage() {
       validate=false
       setErrorForPhoneNumber("This field is required")
     }
+    if(validator.isEmail(data.email)===false){
+      console.log("galat email!")
+      setErrorForEmail("Invalid email id")
+    }
 
     return validate
   };
@@ -73,12 +81,14 @@ export default function SignupPage() {
     setErrorForPassword(" ")
     setErrorForPhoneNumber(" ")
     setErrorForRole(" ")
+    setErrorForEmail(" ")
   }
 
   const dealingWithSignUp = async (event) => {
     event.preventDefault();
     clearErrors()
     if (validateData()) {
+      console.log(data)
       const response = await fetch("/signup", {
         method: "POST",
         headers: {
@@ -87,6 +97,7 @@ export default function SignupPage() {
         body: JSON.stringify(data)
       })
       const responeInJSON = await response.json()
+      console.log("99")
 
       if (response.status === 201) {
         navigate("/")
@@ -94,11 +105,12 @@ export default function SignupPage() {
         if (responeInJSON.error == "username is already taken") {
           setErrorForUsername(responeInJSON.error)
         }
+        if(responeInJSON.error== "account exists for the email"){
+          setErrorForEmail(responeInJSON.error)
+        }
       }
     }
   }
-
-
 
 
   return (
@@ -117,6 +129,20 @@ export default function SignupPage() {
                 name="username"
                 className="username textbox"
                 placeholder="Username"
+                type="text"
+                onChange={handleInputs}
+              ></input>
+            </div>
+
+            <div className="parent">
+              <label className="formlabel foremail" htmlFor="email">
+                Email id
+              </label> <span className="Error"  dangerouslySetInnerHTML={{ __html: errorForEmail }}></span>
+              <input
+                id="email"
+                name="email"
+                className="email textbox"
+                placeholder="Email id"
                 type="text"
                 onChange={handleInputs}
               ></input>
@@ -185,10 +211,6 @@ export default function SignupPage() {
             >
               Sign up
             </button>
-            {/* <PhoneInput
-            className="phoneno textbox"
-            placeholder="Enter phone number"
-             onChange={handleInputs}/> */}
           </form>
         </div>
       </div>
