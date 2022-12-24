@@ -12,8 +12,6 @@ export default function SignupPage() {
 
   const handleCallbackResponse = async (response) => {
     var decodedUserObject = jwt_decode(response.credential)
-
-
     const res = await fetch("/auth", {
       method: "POST",
       headers: {
@@ -97,7 +95,7 @@ export default function SignupPage() {
         },
         body: JSON.stringify(user)
       })
-
+    
       const responeInJSON = await response.json()
       if (response.status === 200) {
         if (responeInJSON.role === 'admin') {

@@ -16,6 +16,7 @@ export default function AdminPage() {
         //even without credentials how does it work??
         credentials: "include"
       })
+
       if (res.status === 200) {
         navigate("/")
       }
@@ -52,6 +53,7 @@ export default function AdminPage() {
   }
 
   useEffect(() => {
+    console.log("geegee")
     callAdminPage()
   }, [])
   //since our array dependency is null useeffect will onl runs once when the page gets rendered
