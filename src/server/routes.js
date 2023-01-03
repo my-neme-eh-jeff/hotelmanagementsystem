@@ -1,10 +1,11 @@
 const express = require("express");
 const User = require("./db/userSchema");
+const Host = require("./db/hostSchema")
 const router = new express.Router();
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 const authenicicate = require("./middleware/authenicication");
-const { Navigate } = require("react-router-dom");
+const { count } = require("./db/userSchema");
 
 router.post("/signup", async (req, res) => {
   const { username, email, password, phonenumber, role } = req.body;
@@ -27,7 +28,15 @@ router.post("/signup", async (req, res) => {
   }
 });
 
-  
+router.post("/uploadingImages", async (req, res) => {
+
+  const { title,city, description, initialDate, finalDate, url ,username} = req.body
+  const data = new Host({ title,city, description, initialDate, finalDate, url ,username})
+  await data.save()
+  res.status(201).json({ message: "added listing successfully" });
+
+})
+
 router.post("/", async (req, res) => {
   try {
     const { username, password } = req.body
@@ -85,6 +94,11 @@ router.post("/auth", async (req, res) => {
   } catch (err) {
     console.log(err)
   }
+})
+
+router.get("/getHotelData",async (req,res)=>{
+  const hotelData = await Host.find()
+  res.send(hotelData)
 })
 
 router.get("/AdminPage", authenicicate, (req, res) => {

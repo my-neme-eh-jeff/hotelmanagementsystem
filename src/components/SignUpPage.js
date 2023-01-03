@@ -69,6 +69,7 @@ export default function SignupPage() {
       setErrorForPhoneNumber("This field is required")
     }
     if(validator.isEmail(data.email)===false){
+      validate=false
       console.log("galat email!")
       setErrorForEmail("Invalid email id")
     }
@@ -88,7 +89,7 @@ export default function SignupPage() {
     event.preventDefault();
     clearErrors()
     if (validateData()) {
-      console.log(data)
+      
       const response = await fetch("/signup", {
         method: "POST",
         headers: {
@@ -96,8 +97,8 @@ export default function SignupPage() {
         },
         body: JSON.stringify(data)
       })
+
       const responeInJSON = await response.json()
-      console.log("99")
 
       if (response.status === 201) {
         navigate("/")
@@ -185,7 +186,7 @@ export default function SignupPage() {
                 name="phonenumber"
                 className="phonenumber textbox"
                 placeholder="Phone Number"
-                type="number"
+                type="tel"
                 onChange={handleInputs}
               ></input>
             </div>

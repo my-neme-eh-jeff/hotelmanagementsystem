@@ -11,11 +11,24 @@
     height: 40px;
 }
 
+#lolop{
+    margin-bottom: 10px;
+}
+
+#lolopp{
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
 .welcome{
 margin-top: 140px;
 font-size: 130px;
 margin-left: 56px;
 transform: scale(0.94);
+}
+
+.divvv{
+    
 }
 
 .loginButton{
@@ -25,6 +38,69 @@ transform: scale(0.94);
     border-radius: 16px;
     border-color: white;
     width: 97px;
+}
+
+
+
+.yyy{
+    margin-top: 40px;
+    margin-left: 320px;
+}
+
+.element{
+    margin-top: 50px;
+}
+
+.react-datepicker__day,
+.react-datepicker__month-text,
+.react-datepicker__quarter-text,
+.react-datepicker__year-text {
+    color: white !important;
+}
+
+ul{
+
+}
+
+.titleOfHotel{
+    font-size: 40px;
+    margin-left: 20px;
+
+}
+
+.individualDataBox{
+    border: 2px solid white;
+}
+
+.mainContentForUserPage{
+    margin: auto;
+    width: 80%;
+    margin-top: 75px;
+}
+
+.individualDataBox{
+    display: inline;
+    float: right;
+    width: 500px;
+    height: 500px;
+}
+
+.titleindividualDataBox{
+    display: inline;
+}
+
+#city{
+    margin-left: 20px;
+    border: solid 2px #E6E6FA;
+    box-shadow: none;
+    border-radius: 10px;
+    width: 200px;
+    display: inline-block;
+    height: 30px;
+}
+
+#city::placeholder{
+    text-align: center;
 }
 
 #geegee:hover{
@@ -40,12 +116,86 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+.backButton:hover{
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+    transition-duration: 70ms;
+}
+
+.backButton{
+    font-size: 20px;
+    margin-top: 26px;
+    margin-left: 745px;
+    height: 45px;
+    border-radius: 16px;
+    border-color: white;
+    width: 97px;
+}
+
+.react-datepicker__day--today,
+.react-datepicker__month-text--today,
+.react-datepicker__quarter-text--today,
+.react-datepicker__year-text--today {
+  color:red !important;
+  font-weight: bold;
+}
+
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--disabled:hover {
+
+}
+.Toastify__progress-bar-theme--colored.Toastify__progress-bar--info,
+.Toastify__progress-bar-theme--colored.Toastify__progress-bar--success,
+.Toastify__progress-bar-theme--colored.Toastify__progress-bar--warning,
+.Toastify__progress-bar-theme--colored.Toastify__progress-bar--error {
+    color: #E6E6FA;
+}
+
+.Toastify__toast-theme--light {
+    background-color: #222222 !important;
+}
+
+
+
+.react-datepicker__day--disabled,
+.react-datepicker__month-text--disabled,
+.react-datepicker__quarter-text--disabled,
+.react-datepicker__year-text--disabled {
+  cursor: default;
+  color: black !important;
+}
+
+
+
+.react-datepicker__input-container input {
+    width: 80%;
+    margin-left: 40px;
+    cursor: pointer;
+    border: none;
+    font-size: 20px;   
+}
+ 
+.react-datepicker__input-container{
+      width:80%;
+      font-size: 25px;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #212529;
+      border: 1px solid #ced4da;
+      border-radius: 16px;
+      border-color: white;
+      appearance: none;
+      height: 36px;
+      cursor: pointer;
+}
+
+  
 
 .loginButton:hover{
     font-size: 22px;
     font-weight: bold;
     cursor: pointer;
-    transition-duration: 50ms;
+    transition-duration: 70ms;
 }
 
 .animation1{
@@ -57,6 +207,13 @@ input::-webkit-inner-spin-button {
     place-items:center;
 }
   
+.huge-button:hover{
+    font-size: 47px;
+    font-weight: bold;
+    cursor: pointer;
+    transition-duration: 70ms;
+}
+
   @keyframes typing {
     from {
       width: 0
@@ -89,6 +246,46 @@ input::-webkit-inner-spin-button {
     color: red;
 }
 
+.logoutButton{
+    margin-left: 220px;
+    font-size: 20px;
+    margin-top: 26px;
+    height: 45px;
+    border-radius: 16px;
+    border-color: white;
+    width: 97px;
+
+}
+
+.titleforhostpage{
+    margin-left: 35px;
+    font-size: 50px;
+    text-align: center;
+    display: inline-block;
+}
+
+.huge-button{
+    font-size: 40px;
+    margin-top: 26px;
+    height: 210px;
+    border-radius: 16px;
+    border-color: white;
+    width: 300px;
+}
+
+.mainContentForHostPage{
+    margin-top: 90px;
+    display: grid;
+    grid-template-columns: auto auto ;
+    grid-template-rows: 300px 300px;
+    align-content: space-around;
+    justify-content: space-around;
+}
+
+.react-datepicker__month-year-read-view--down-arrow, .react-datepicker__navigation-icon::before {
+    border-color: white !important;
+}
+
 .form1{
     font-size: 20px;
     float: right;
@@ -96,6 +293,7 @@ input::-webkit-inner-spin-button {
     margin-right:78px ;
     margin-top: calc(50% - 100px);
 }
+
 
 .ifWeHaveAnAccount{
     cursor: pointer;
@@ -108,6 +306,34 @@ input::-webkit-inner-spin-button {
 .form{
     display: grid;
     justify-content: center;
+}
+
+#image{
+    display: none;
+}
+
+#cityLabel{
+    margin-left: 20px;
+    display: inline;
+}
+
+#vohvalalabel{
+    border: 1px solid #ccc;
+    padding: 6px 6px;
+    cursor: pointer;
+    height: 45px;
+    border-radius: 16px;
+    border-color: white;
+}
+
+#vohvalalabel:hover{
+    font-weight: bold;
+    cursor: pointer;
+    transition-duration: 70ms;
+}
+
+.abcd{
+margin-top: 100px;
 }
 
 input:focus{
