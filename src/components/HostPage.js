@@ -80,9 +80,6 @@ export default function HostPage() {
         <div>
           <button className='huge-button' onClick={()=>changePage("add")}>Add New listing</button>
         </div>
-        <div>
-          <button className='huge-button' onClick={()=>changePage("delete")}>Remove a listing</button>
-        </div>
       </div>
 
     </>

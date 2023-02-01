@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
+import Carousel from 'react-bootstrap/Carousel';
 
 export default function UserPage() {
   const navigate = useNavigate();
   const [userData, setUserData] = useState({})
   const [hotelData, setHotelData] = useState([])
+  const [query, setQuery] = useState("")
 
   const dealingWithLogout = async () => {
     try {
@@ -63,15 +65,13 @@ export default function UserPage() {
       credentials: "include"
     })
     setHotelData(await res.json())
-    hotelData.map((hotels) => {
-      console.log(hotels.url)
-    })
+
   }
 
 
   const sortByCity = (event) => {
-    var city = event.target.value
-
+    setQuery(event.target.value)
+    console.log(query)
   }
 
 
@@ -81,13 +81,12 @@ export default function UserPage() {
     getData()
   }, [])
   //since our array dependency is null useeffect will onl runs once when the page gets rendered
-  const dataInDiv = () => {
 
-  }
 
 
   return (
     <>
+
       <h1 className='titleforhostpage'>Welcome {userData.username}</h1>
       <button className='logoutButton' onClick={dealingWithLogout} >logout</button>
       <div className='parent yyy'>
@@ -102,20 +101,37 @@ export default function UserPage() {
       </div>
       <div className='mainContentForUserPage'>
         {
-          <ul>
+          <ul className='listStyling'>
             {hotelData.map((hotels, index) => (
-              <li key={index} className="element">
-                <div className='individualDataBox'>
-                  <div className='imageOfindividualDataBox'>
-                    <img url={hotels.url[0]}></img>
-
+              (hotels.city == query || query=="") ?
+                <li key={index} className="element">
+                  <div className='individualDataBox'>
+                    <div className='imageOfindividualDataBox'>
+                      <Carousel variant='dark'>
+                        {
+                          hotels.url.map((image, index) => (
+                            <Carousel.Item>
+                              <img
+                                key={index}
+                                className='hotelImages'
+                                src={image}>
+                              </img>
+                            </Carousel.Item>
+                          ))
+                        }
+                      </Carousel>
+                    </div>
+                    <div className='titleindividualDataBox'>
+                      <p className='titleee'>{hotels.title}</p>
+                      <p className='description'>{hotels.description}</p>
+                      <p className='hostName'> This hotel is owned by {hotels.username}  whom you can contact at{hotels.phoneNumber}</p>
+                    </div>
                   </div>
-                  <div className='titleindividualDataBox'>
-                    <p className='titleOfHotel'>{hotels.title}</p>
-                    <p className='description'>{hotels.description}</p>
-                  </div>
-                </div>
-              </li>
+                </li>
+                :
+                <>
+                <div>No hotel availible in the city!</div>
+                </>
             ))}
           </ul>
         }

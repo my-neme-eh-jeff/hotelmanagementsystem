@@ -14,6 +14,7 @@ export default function AddListingPage() {
   const [url, setUrl] = useState("");
   const imageUrls = []
   const [username, setUserName] = useState("")
+  const [phoneNumber,setPhoneNumber] = useState(0)
 
   const [data, setData] = useState({
     title: "",
@@ -43,7 +44,6 @@ export default function AddListingPage() {
       return;
     }
 
-    var form = document.getElementsByClassName("abcd")
     var imageFiles = document.getElementById("image")
 
     for (const file of imageFiles.files) {
@@ -67,9 +67,11 @@ export default function AddListingPage() {
         return;
       }
     }
+
+    
     var id = format(initialDateSelected, 'dd/MM/yyyy')
     var fd = format(finallDateSelected, 'dd/MM/yyyy')
-    var dataa = { ...data, "username": username, "initialDate": id, "finalDate": fd, "url": imageUrls }
+    var dataa = { ...data,"phoneNumber":phoneNumber, "username": username, "initialDate": id, "finalDate": fd, "url": imageUrls }
     try {
       imageUrls.forEach((url) => {
         console.log(url)
@@ -142,6 +144,7 @@ export default function AddListingPage() {
         throw new Error
       }
       setUserName(data.username)
+      setPhoneNumber(data.phonenumber)
     } catch (err) {
       navigate("/")
       console.log(err)
@@ -209,11 +212,11 @@ export default function AddListingPage() {
           ></input>
         </div>
         <div className="parent" id='divvv'>
-          <label className="formlabel forcity" htmlFor="city">
+          <label className="formlabel forcity" htmlFor="cityy">
             City
           </label>
           <input
-            id='city'
+            id='cityy'
             name="city"
             className="cityOfHotel textbox"
             placeholder="City"
@@ -260,6 +263,7 @@ export default function AddListingPage() {
           dateFormat='dd/MM/yyyy'
           minDate={new Date()}>
         </DatePicker>
+
 
         <button
           type="submit"

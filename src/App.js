@@ -7,6 +7,8 @@ import AdminPage from "./components/AdminPage"
 import HostPage from "./components/HostPage"
 import UserPage from "./components/UserPage"
 import AddListingPage from './components/AddListingPage';
+import EditListingPage from './components/EditListingPage';
+import DisplayListing from './components/DisplayListing';
 
 function App() {
 
@@ -21,6 +23,8 @@ function App() {
           <Route exact path='/host' element={<HostPage />}></Route>
           <Route exact path='/user' element={<UserPage />}></Route>
           <Route exact path='/host/add/' element={<AddListingPage />}></Route>
+          <Route exact path='/host/display/' element={<DisplayListing />}></Route>
+          <Route exact path='/host/edit/' element={<EditListingPage />}></Route>          
         </Routes>
       </BrowserRouter>
     </div>

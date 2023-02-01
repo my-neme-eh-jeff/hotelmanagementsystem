@@ -5,10 +5,10 @@ const router = new express.Router();
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 const authenicicate = require("./middleware/authenicication");
-const { count } = require("./db/userSchema");
 
 router.post("/signup", async (req, res) => {
   const { username, email, password, phonenumber, role } = req.body;
+
   const userExist = await User.findOne({ username: username });
   const emailExist = await User.findOne({ email: email })
   try {
@@ -29,13 +29,13 @@ router.post("/signup", async (req, res) => {
 });
 
 router.post("/uploadingImages", async (req, res) => {
-
-  const { title,city, description, initialDate, finalDate, url ,username} = req.body
-  const data = new Host({ title,city, description, initialDate, finalDate, url ,username})
+  const { title,city,phoneNumber, description, initialDate, finalDate, url ,username} = req.body
+  const data = new Host({ title,city,phoneNumber, description, initialDate, finalDate, url ,username})
   await data.save()
   res.status(201).json({ message: "added listing successfully" });
 
 })
+
 
 router.post("/", async (req, res) => {
   try {
@@ -100,6 +100,14 @@ router.get("/getHotelData",async (req,res)=>{
   const hotelData = await Host.find()
   res.send(hotelData)
 })
+
+router.get("/getHotelData/Host",async (req,res)=>{
+  console.log(req.body)
+  const hotelData = await Host.find({username:req.body.username})
+  console.log(hotelData)
+  res.send(hotelData)
+})
+
 
 router.get("/AdminPage", authenicicate, (req, res) => {
   res.send(req.userData)

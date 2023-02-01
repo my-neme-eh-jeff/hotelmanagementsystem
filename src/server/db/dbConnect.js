@@ -7,4 +7,3 @@ mongoose.connect(db).then(()=>{
     console.log(`connection unsuccessful`)
     console.log(err)
 })
-

@@ -20,6 +20,14 @@
     margin-bottom: 10px;
 }
 
+#initialDateSelected{
+    line-height: 0;
+}
+
+#finalDateSelected{
+    line-height: 0;
+}
+
 .welcome{
 margin-top: 140px;
 font-size: 130px;
@@ -27,8 +35,7 @@ margin-left: 56px;
 transform: scale(0.94);
 }
 
-.divvv{
-    
+.react-datepicker__input-container{
 }
 
 .loginButton{
@@ -58,35 +65,56 @@ transform: scale(0.94);
     color: white !important;
 }
 
-ul{
-
+.description{
+    font-size: 20px;
+    margin-left: 30px;
+    margin-bottom: 70px;
 }
 
-.titleOfHotel{
+.carousel-indicators{
+background-color: transparent;
+}
+
+.hostName{
+    font-size: 15px;
+    margin-left: 30px;
+}
+
+.titleee{
     font-size: 40px;
-    margin-left: 20px;
-
+    margin-left: 50%;
+    text-decoration: underline;
 }
 
-.individualDataBox{
-    border: 2px solid white;
-}
 
 .mainContentForUserPage{
-    margin: auto;
-    width: 80%;
-    margin-top: 75px;
+    width: 88%;
+    margin-top: 83px;
 }
 
 .individualDataBox{
     display: inline;
     float: right;
-    width: 500px;
-    height: 500px;
+    width: 700px;
+    height: 700px;
+    border: 2px solid white;
+    display: inline;
+    margin-bottom: 66px;
+}
+
+.imageOfindividualDataBox{
+    width: 700px;
+    height: 394px;
+    
+}
+
+.hotelImages{
+    width: 700px;
+    height: 394px;
 }
 
 .titleindividualDataBox{
-    display: inline;
+
 }
 
 #city{
@@ -141,9 +169,6 @@ input::-webkit-inner-spin-button {
   font-weight: bold;
 }
 
-.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--disabled:hover {
-
-}
 .Toastify__progress-bar-theme--colored.Toastify__progress-bar--info,
 .Toastify__progress-bar-theme--colored.Toastify__progress-bar--success,
 .Toastify__progress-bar-theme--colored.Toastify__progress-bar--warning,
@@ -244,6 +269,10 @@ input::-webkit-inner-spin-button {
 
 .Error{
     color: red;
+}
+
+.listStyling{
+    list-style-type: none;
 }
 
 .logoutButton{
